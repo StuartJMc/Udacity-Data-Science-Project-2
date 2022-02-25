@@ -4,8 +4,7 @@
 
 The messages in the Figure 8 dataset have been labelled into 36 categories, to make it easier to quickly determine the message's relevance to the disaster response processionals. Using these pre-labelled messages, a classifier can be trained that will automatically sort messages into categories relevent to disaster response professionals.
 
-This classifier can be used in a a web app, to allow emergency workers to input messages and quickly get classifications.
-**Aim:** To analyze labelled message data from FigureEight and produce an API for classifying messages into disaster response categories.
+This classifier can be used in a a web app, to allow emergency workers to input messages and quickly get classifications. This will aid in reducing the time spent reviewing messages.
 
 ## Instructions:
 Follow instructions to intiate database, train model and launch web app
