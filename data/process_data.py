@@ -60,6 +60,9 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = categories[column].astype(int)
     
+    #convert 2's in related column to 1
+    categories['related']=categories['related'].apply(lambda x : 1 if x==2 else x)
+    
     # drop the original categories column from `df` and create new dataframe 'df_clean'
     df_clean=df.drop(columns='categories')  
     
