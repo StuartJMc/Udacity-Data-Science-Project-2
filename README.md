@@ -1,6 +1,11 @@
 # Disaster Response Pipeline Project
 
-**Aim** To analyze labelled message data from FigureEight and produce an API for classifying messages into disaster response categories
+**Background:** Message data from Figure 8 has been collated from real tweets/texts that were sent during the time of disaster events. These are the communications response workers will recieve as the disaster. However, due to their large volume and varied nature, it is difficult for responders to use these communications to aid rescue/ relief in the often tight time windows. Often, only 1 in 1000 messages ent at the time are relevent to the response effort.
+
+The messages in the Figure 8 dataset have been labelled into 36 categories, to make it easier to quickly determine the message's relevance to the disaster response processionals. Using these pre-labelled messages, a classifier can be trained that will automatically sort messages into categories relevent to disaster response professionals.
+
+This classifier can be used in a a web app, to allow emergency workers to input messages and quickly get classifications.
+**Aim:** To analyze labelled message data from FigureEight and produce an API for classifying messages into disaster response categories.
 
 ## Instructions:
 Follow instructions to intiate database, train model and launch web app
