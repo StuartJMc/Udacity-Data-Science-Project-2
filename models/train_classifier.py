@@ -57,7 +57,7 @@ def load_data(database_filepath):
     # load data from database
     engine = create_engine(f'sqlite:///{database_filepath}')
     
-    df = pd.read_sql("SELECT * FROM DisasterResponse",engine)
+    df = pd.read_sql_table("DisasterResponse",engine)
     df.index=df['id']
     X = df[['message','original','genre']]
     Y = df.drop(columns=['id','message','original','genre'])
@@ -198,6 +198,9 @@ def main():
 
     
     if len(sys.argv) == 3:
+        
+        nltk.download('stopwords')
+        
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
         X, Y, category_names = load_data(database_filepath)

@@ -3,6 +3,8 @@
 **Aim** To analyze labelled message data from FigureEight and produce an API for classifying messages into disaster response categories
 
 ## Instructions:
+Follow instructions to intiate database, train model and launch web app
+
 0. Prequisite, pip install lightgbm, if not already installed
 
 1. Run the following commands in the project's root directory to set up your database and model.
