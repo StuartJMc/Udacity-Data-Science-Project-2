@@ -1,6 +1,7 @@
 import json
 import plotly
 import pandas as pd
+import numpy as np
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
@@ -26,11 +27,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('DisasterResponse', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -39,13 +40,21 @@ model = joblib.load("../models/your_model_name.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    categories=df.drop(columns=['id','message','original','genre']).columns
+    
+    category_counts=df[categories].sum().sort_values(ascending=False)
+   
+    count_values = category_counts.values
+    category_names = category_counts.index
+    
+    corr_mat=df[categories].corr().values
+    
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
+        #chart1
         {
             'data': [
                 Bar(
@@ -63,7 +72,68 @@ def index():
                     'title': "Genre"
                 }
             }
-        }
+        },
+        
+        #chart2: category counts
+        
+         {
+            'data': [
+                Bar(
+                    x=category_names,
+                    y=count_values
+                )
+            ],
+
+            'layout': {
+                'title': 'Count of Disaster Response Categories in Dataset',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category"
+                },
+                  'margin': {
+                    'l': 100,
+                    'r': 50,
+                    'b': 150,
+                    't': 100,
+                    'pad': 4
+                  },
+            }
+        },
+        #chart 3: heatmap 
+       {
+            "data": [
+               {
+        
+                "name": "Corr Heatmap",
+                "type": "heatmap",
+                "z": corr_mat,
+                "x":categories,
+                "y":categories
+               }
+            ],
+           
+           'layout': {
+                'title': 'Heatmap of correlation between categories',
+               'height':700,
+               'width':600,
+               'margin': {
+                    'l': 100,
+                    'r': 50,
+                    'b': 100,
+                    't': 100,
+                    'pad': 4
+                  },
+              
+            }
+      }    
+  
+        
+        
+        
+        
+        
     ]
     
     # encode plotly graphs in JSON
